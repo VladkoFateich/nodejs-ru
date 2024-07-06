@@ -1,0 +1,6 @@
+Hello
+this 
+is 
+info 
+from
+stdin-pipe-stdout.mjs
