@@ -2,6 +2,7 @@ import express from 'express';
 //внешний npm пакет для логирования
 import morgan from 'morgan';
 // import qs from 'querystring';
+import cors from 'cors';
 
 const app = express();
 
@@ -12,7 +13,6 @@ const app = express();
 //   next();
 // };
 // app.use(logger);
-
 // app.use(morgan('combined'));
 app.use(morgan('tiny')); // логирует информацию в консоль Returns middleware
 
@@ -20,9 +20,16 @@ app.use(express.json()); //Конвертирует JSON в объект js и �
 
 app.use(express.urlencoded({ extended: true })); //Returns middleware парсинг строк  true означает что используется внешний модуль qs для конвертации формы в обьект. qs она из зависимостей  модулья express
 
+app.use(cors());
+
 app.use((req, res) => {
+  const personData = {
+    name: 'Vladislav',
+    surname: 'Fateev',
+    isInstructor: false,
+  };
   console.log(req.body);
-  return res.send('This is express server');
+  return res.json({ personData });
 });
 
 app.listen(5000, () => {
